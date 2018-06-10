@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+
+    <!-- Animate CSS CDN -->
+    <link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+
+
+	<!-- Bootstrap CDN -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous"/>
+
+	<!-- External CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
+	<title>Fast Hands</title>
+</head>
+<body id="mainBody">
+
+	<div class="container">
+		<div class="row main-page d-flex align-items-center">
+
+			<div id="landing-page">
+
+				<div class="col-lg-12 text-center">
+					<div class="wow bounceInDown">
+						<h1 class="display-1">Welcome to <span class="font-weight-bold text-danger">Fast hands</span></h1>			
+					</div>
+
+					<div class="wow zoomInUp" data-wow-delay=".5s">
+						<p class="display-4 mt-5">A simple JavaScript game developed by <span class="text-primary">Rommel Torquator</span></p>
+					</div>				
+
+					<div class="wow lightSpeedIn" data-wow-delay="1.5s">
+						<button id="mainButton" type="button" class="btn btn-outline-danger btn-lg mt-5">Let's begin</button>		
+					</div>
+				</div>
+			</div>
+
+			
+			<!-- .. -->
+
+			<div class="col text-center name-page">
+				<div id="theAnimation" class="wow bounceInDown">
+					<h2 id="welcomeHtml" class="display-3 mb-5">Please enter your name:</h2>					
+				</div>
+
+				<form id="theForm" class="wow zoomInUp" data-wow-delay=".5s">
+					<div class="form-group d-block" style="margin: 0 auto;">
+						<input id="theName" type="text" name="" placeholder="name" class="form-control d-block" style="width: 40%; margin: 0 auto;">
+					</div>
+
+					<button id="mainButton2" type="button" class="btn btn-outline-danger btn-lg mt-5">Enter</button>
+				</form>
+			</div> 
+
+			<!-- .. -->
+
+			<div class="col text-center wow zoomInDown" id="welcomePage">
+				<h1 id="theWelcome" class="display-1"></h1>					
+			</div>
+
+			<!-- .. -->
+
+			<div class="col text-center wow fadeIn" id="instructionsPage">
+				<h1 class="display-2 mb-5">Just press <span class="text-danger">space bar</span> as many times as you can</h1>
+
+				<div class="wow fadeIn" data-wow-delay="1s">
+					<h2 id="theSpace" class="display-3 text-primary">Just press space bar to start</h2>
+				</div>
+			</div>
+
+			<!-- .. -->
+
+			<div class="col justify-content-column text-center theScore">
+				<div class="align-self-top">
+					<h1 id="theTime"></h1>
+				</div>
+
+				<h1 id="showScore"></h1>
+			</div>
+
+			<!-- . -->
+
+			<div class="col text-center finalPage">
+				<h1 class="text-light display-2">Time's up!</h1>
+				<h1 class="text-light display-2 wow rotateIn">Your score is <span id="theFinalScore"></span></h1>
+
+				<h1 class="display-3 wow fadeIn" data-wow-delay="1.5s">Press f5 to play again</h1>
+			</div>
+
+		</div>
+	</div>
+
+
+
+
+
+
+
+	<!-- Bootstrap Js -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+	<!-- WowJs -->
+	<script type="text/javascript" src="assets/js/wow.min.js"></script>
+
+	<script type="text/javascript">
+		$('.name-page').hide();
+		$('.finalPage').hide();
+
+		$('#mainButton').click(function(){
+			$('#landing-page').hide();
+
+			$('.name-page').show();
+		});
+
+		$('#welcomePage').hide();
+		$('#instructionsPage').hide();
+
+		$('.theScore').hide();
+
+		$('#mainButton2').click(function(){
+			var name = $('#theName').val();
+
+			$('.name-page').hide();
+			$('#welcomePage').show();
+			$('#theWelcome').html('<strong>Welcome ' + name + '</strong>');
+
+			setTimeout(function(){
+				$('#welcomePage').hide();
+				$('#instructionsPage').show();
+			}, 2000);
+		});
+
+		var keyPressCount = 0;
+		var totalScore = 0;
+		// var counter = 10;
+		var trigger = 0;
+					
+		$(document).on("keyup", function(e){
+			var counter = 5;
+
+			if(e.keyCode == 32){
+				$('#instructionsPage').hide();
+				$('.theScore').show();
+
+				keyPressCount++;
+
+				$('#showScore').html(totalScore = keyPressCount * 20);
+
+				if(totalScore == 100){
+					$("#showScore").css("color", "blue").css('font-size', '100px');
+					$("#mainBody").css('background-color', '#DCDCDC');
+
+					$('#theTime').css('color', 'black');
+				} else if(totalScore == 300){
+					$("#showScore").css("color", "#242424").css('font-size', '130px');
+					$("#mainBody").css('background-color', '#A9A9A9');
+
+					$('#theTime').css('color', '#242424');
+				} else if(totalScore == 500){
+					$("#showScore").css("color", "#e9e9e9").css('font-size', '170px');
+					$("#mainBody").css('background-color', '#383838');	
+
+					$('#theTime').css('color', '#e9e9e9');				
+				} else if(totalScore == 700){
+					$("#showScore").css("color", "#fffff8").css('font-size', '200px');
+					$("#mainBody").css('background-color', '#000');
+
+					$('#theTime').css('color', '#fffff8');
+				} else if(totalScore == 900){
+					$("#showScore").css("color", "#fffff8").css('font-size', '250px');
+					$("#mainBody").css('background-color', '#000');
+
+					$('#theTime').css('color', '#fffff8');
+				} else if(totalScore == 1100){
+					$("#showScore").css("color", "#fffff8").css('font-size', '300px');
+					$("#mainBody").css('background-color', '#000');
+
+					$('#theTime').css('color', '#fffff8');
+				}
+			} 
+
+			if(e.keyCode == 32 && totalScore == 20){
+				setInterval(function(){
+					counter--;
+					$('#theTime').html(counter);
+
+					if(counter == 0 && e.keyCode == 32){
+						console.log('sex');
+						$('.theScore').html("Woah!! That was fast!");
+						$('.theScore').css("font-size", '150px').css("color", '#fffff8');
+						$('.theScore').hide();
+
+						$('.finalPage').show();
+
+						$('#theFinalScore').html(totalScore);
+					};
+
+				}, 1000);
+			} 
+		}); //end keyup
+		
+		console.log(keyPressCount);
+		console.log(totalScore);
+		console.log(trigger);
+
+		new WOW().init();
+	</script>
+</body>
+</html>
